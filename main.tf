@@ -1,7 +1,8 @@
 # main.tf
 resource "null_resource" "mock_firewall_rule" {
   provisioner "local-exec" {
-    command = "echo 'Simulating adding a firewall rule: Allow TCP port 80 from 0.0.0.0/0'"
+    # Simulate adding a firewall rule by writing to a local file
+    command = "echo 'Simulating adding a firewall rule: Allow TCP port 80 from 0.0.0.0/0' > firewall_rule.txt"
   }
 
   triggers = {
@@ -12,7 +13,8 @@ resource "null_resource" "mock_firewall_rule" {
 
 resource "null_resource" "mock_firewall_cleanup" {
   provisioner "local-exec" {
-    command = "echo 'Simulating removal of a firewall rule: Allow TCP port 80 from 0.0.0.0/0'"
+    # Simulate removing a firewall rule by appending to the local file
+    command = "echo 'Simulating removal of a firewall rule: Allow TCP port 80 from 0.0.0.0/0' >> firewall_rule.txt"
   }
 
   triggers = {
