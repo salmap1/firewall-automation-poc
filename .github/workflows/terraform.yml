@@ -1,34 +1,30 @@
 name: Terraform Workflow
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
-      - master
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:  # Allow manual triggering of the workflow
 
 jobs:
   terraform:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v2
       with:
-        terraform_version: 1.6.0  # Change to the Terraform version you are using
+        terraform_version: 1.3.0  # Specify your Terraform version
 
-    - name: Initialize Terraform
+    - name: Terraform Init
       run: terraform init
 
-    - name: Validate Terraform
-      run: terraform validate
-
-    - name: Plan Terraform
-      run: terraform plan
-
-    - name: Apply Terraform
+    - name: Terraform Apply
       run: terraform apply -auto-approve
 
