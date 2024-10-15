@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - main
+<<<<<<< HEAD
   pull_request:
     branches:
       - main
   workflow_dispatch:  # Allow manual triggering of the workflow
+=======
+>>>>>>> e0ca8f8690bea671d472dc02c7c1e5c27616bd56
 
 jobs:
   terraform:
