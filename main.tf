@@ -2,7 +2,7 @@
 resource "null_resource" "mock_firewall_rule" {
   provisioner "local-exec" {
     # Simulate adding a firewall rule by writing to a local file
-    command = "echo 'Simulating adding a firewall rule: Allow TCP port 443 from 0.0.0.0/0' > firewall_rule.txt"
+    command = "echo 'Simulating adding a firewall rule: Allow TCP port 8080 from 0.0.0.0/0' > firewall_rule.txt"
   }
 
   triggers = {
@@ -14,7 +14,7 @@ resource "null_resource" "mock_firewall_rule" {
 resource "null_resource" "mock_firewall_cleanup" {
   provisioner "local-exec" {
     # Simulate removing a firewall rule by appending to the local file
-    command = "echo 'Simulating removal of a firewall rule: Allow TCP port 443 from 0.0.0.0/0' >> firewall_rule.txt"
+    command = "echo 'Simulating removal of a firewall rule: Allow TCP port 8080 from 0.0.0.0/0' >> firewall_rule.txt"
   }
 
   triggers = {
