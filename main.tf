@@ -1,27 +1,28 @@
-# main.tf
-resource "null_resource" "mock_firewall_rule" {
-  provisioner "local-exec" {
-    # Simulate adding a firewall rule by writing to a local file
-    command = "echo 'Simulating adding a firewall rule: Allow TCP port 8080 from 0.0.0.0/0' > firewall_rule.txt"
+terraform {
+  required_providers {
+    panos = {
+      source  = "PaloAltoNetworks/panos"
+      version = "1.9.0" # Specify the version you want to use
+    }
   }
 
-  triggers = {
-    # This can be used to make the resource dynamic for demo purposes
-    rule_name = "allow_https"
-  }
+  required_version = ">= 0.13"
 }
 
-resource "null_resource" "mock_firewall_cleanup" {
-  provisioner "local-exec" {
-    # Simulate removing a firewall rule by appending to the local file
-    command = "echo 'Simulating removal of a firewall rule: Allow TCP port 8080 from 0.0.0.0/0' >> firewall_rule.txt"
-  }
+provider "panos" {
+  hostname = "10.255.49.67"
+  username = "salmap"
+  password = "Plum@7890"
+}
 
-  triggers = {
-    rule_name = "allow_https"
-  }
-
-  # Make the cleanup dependent on the rule creation
-  depends_on = [null_resource.mock_firewall_rule]
+resource "panos_security_rule" "allow_http" {
+  name        = "Allow HTTP"
+  source_zones = ["trust"]
+  source_addresses = ["any"]
+  destination_zones = ["untrust"]
+  destination_addresses = ["any"]
+  application = ["web-browsing"]
+  service     = ["application-default"]
+  action      = "allow"
 }
 
