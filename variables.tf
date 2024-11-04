@@ -1,15 +1,15 @@
-variable "firewall_hostname" {
-  description = "Palo Alto firewall hostname or IP"
+variable "hostname" {
+  description = "The hostname of the Palo Alto device."
   type        = string
 }
 
 variable "username" {
-  description = "Firewall username"
+  description = "The username for the Palo Alto device."
   type        = string
 }
 
 variable "password" {
-  description = "Firewall password"
+  description = "The password for the Palo Alto device."
   type        = string
 }
 
