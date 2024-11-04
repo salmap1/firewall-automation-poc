@@ -1,33 +1,28 @@
-name: Terraform Workflow
+name: Terraform Automation
 
 on:
   push:
     branches:
-      - main
-<<<<<<< HEAD
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:  # Allow manual triggering of the workflow
-=======
->>>>>>> e0ca8f8690bea671d472dc02c7c1e5c27616bd56
+      - noc
+      - ip
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.3.0  # Specify your Terraform version
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
 
-    - name: Terraform Init
-      run: terraform init
+      - name: Terraform Init
+        run: terraform init
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/noc' || github.ref == 'refs/heads/ip'
+        run: terraform apply -auto-approve
 
