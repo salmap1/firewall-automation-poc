@@ -15,17 +15,18 @@ provider "panos" {
 
 resource "panos_security_policy" "noc_allow_ssh" {
   rule {
-    name                  = "NOC-Allow-SSH-Rule"
-    description           = "Allow SSH traffic from any source to any destination for the NOC team"
+    name                  = "Allow-SSH-Rule"
+    description           = "Allow SSH traffic from any source to any destination by NOC team"
     source_zones          = ["any"]
-    source_addresses      = ["any"]
+    source_addresses      = ["1.1.1.1"]
     source_users          = ["any"]
     destination_zones     = ["any"]
-    destination_addresses = ["any"]
+    destination_addresses = ["2.2.2.2"]
     categories            = ["any"]
     applications          = ["ssh"]
     services              = ["application-default"]
     action                = "allow"
+    tags                  = ["NOC-Team"]
   }
 }
 
