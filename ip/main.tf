@@ -15,13 +15,13 @@ provider "panos" {
 
 resource "panos_security_policy" "ip_allow_ssh" {
   rule {
-    name                  = "Allow-SSH-Rule"
+    name                  = "Allow-SSH-Rulessss"
     description           = "Allow SSH traffic from any source to any destination by IP team"
     source_zones          = ["any"]
-    source_addresses      = ["any"]
+    source_addresses      = ["3.3.3.3"]
     source_users          = ["any"]
     destination_zones     = ["any"]
-    destination_addresses = ["any"]
+    destination_addresses = ["1.1.1.1"]
     categories            = ["any"]
     applications          = ["ssh"]
     services              = ["application-default"]
