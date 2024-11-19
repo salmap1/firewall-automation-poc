@@ -8,7 +8,7 @@ on:
 
 jobs:
   terraform:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(vars.SWI_GLORG_UBUNTU_2204) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
