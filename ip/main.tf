@@ -15,7 +15,7 @@ provider "panos" {
 
 resource "panos_security_policy" "ip_allow_ssh" {
   rule {
-    name                  = "Allow-SSH-Rulessss"
+    name                  = "Allow-SSH-to-ip-team"
     description           = "Allow SSH traffic from any source to any destination by IP team"
     source_zones          = ["any"]
     source_addresses      = ["3.3.3.3"]
